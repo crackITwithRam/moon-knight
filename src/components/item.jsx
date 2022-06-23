@@ -4,9 +4,8 @@ import "./item.scss";
 const Item = ({
   grocery,
   handleRemoveItem,
-  mode,
   onItemDblClick,
-  onKeyPress,
+  onEnterKeyPress,
 }) => {
   return (
     <div className="banner">
@@ -14,19 +13,20 @@ const Item = ({
         <img src={grocery.image} alt={grocery.name} />
       </div>
       <div className="flex-container">
-        {mode ? (
+        {grocery.editMode ? (
           <div className="text">
             <input
               type="text"
-              onKeyPress={(e) => onKeyPress(e, grocery.id)}
+              onKeyPress={(e) => onEnterKeyPress(e,grocery.id)}
               defaultValue={grocery.name}
+              name="name"
             />
-            <input type="text" defaultValue={grocery.price} width="50%" />
+            <input type="text" defaultValue={grocery.price} name="price" onKeyPress={(e) => onEnterKeyPress(e,grocery.id)} width="50%" />
           </div>
         ) : (
           <div
             className="text"
-            onDoubleClick={onItemDblClick}
+            onDoubleClick={()=>onItemDblClick(grocery.id)}
           >{`${grocery.name} : ${grocery.price}`}</div>
         )}
 

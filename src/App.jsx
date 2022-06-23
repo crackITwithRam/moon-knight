@@ -14,24 +14,27 @@ const initItmes = [
 //parent component
 const App = () => {
   const updatedInitItems = initItmes.map((item) => {
-    return { ...item, image: imageObj[item.alt] };
+    return { ...item, image: imageObj[item.alt],editMode:false };
   });
 
   const [list, setList] = useState(updatedInitItems);
-  const [edit, setEdit] = useState(false);
+  
 
-  const _onKeyPressHandler = (e, gId) => {
-    list.forEach((item) => {
-      if (item.id === gId) {
-        item.name = e.target.value;
+  const _onKeyPressHandler = (e,gId) => {
+    if(e.key==='Enter'){
+      setList(list.map((items)=>{
+      if(items.id===gId){
+        items[e.target.name]=e.target.value;
+        items.editMode=false;
       }
-    });
-
-    e.key === "Enter" && setEdit(false);
+      return items
+    }))
+  }
   };
 
   const _handleRemove = () => {
-    const filteredList = list.filter((value) => value.price <= 100);
+    const maxPrice=Math.max(...list.map((items)=>{return parseInt(items.price);}))
+    const filteredList = list.filter((value) => parseInt(value.price)!== maxPrice);
     setList(filteredList);
   };
 
@@ -40,8 +43,14 @@ const App = () => {
     setList(filteredList);
   };
 
-  const _onItemDobuleCLick = () => {
-    setEdit(true);
+  const _onItemDobuleCLick = (gid) => {
+    setList(list.map(items=>{
+      if(items.id===gid)
+      items.editMode=true
+      return items
+    }))
+    
+    
   };
 
   return (
@@ -135,9 +144,8 @@ const App = () => {
             <GroceryItem
               grocery={grocery}
               handleRemoveItem={_handleRemoveItem}
-              mode={edit}
               onItemDblClick={_onItemDobuleCLick}
-              onKeyPress={_onKeyPressHandler}
+              onEnterKeyPress={_onKeyPressHandler}
             />
           </div>
         ))}
