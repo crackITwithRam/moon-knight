@@ -5,7 +5,7 @@ const Item = ({
   grocery,
   handleRemoveItem,
   onItemDblClick,
-  onEnterKeyPress,
+  onKeyPress,
 }) => {
   return (
     <div className="banner">
@@ -17,11 +17,11 @@ const Item = ({
           <div className="text">
             <input
               type="text"
-              onKeyPress={(e) => onEnterKeyPress(e,grocery.id)}
+              onKeyPress={(e) => onKeyPress(e,grocery.id)}
               defaultValue={grocery.name}
               name="name"
             />
-            <input type="text" defaultValue={grocery.price} name="price" onKeyPress={(e) => onEnterKeyPress(e,grocery.id)} width="50%" />
+            <input type="text" defaultValue={grocery.price} name="price" onKeyPress={(e) => onKeyPress(e,grocery.id)} width="50%" />
           </div>
         ) : (
           <div

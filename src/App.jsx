@@ -145,7 +145,7 @@ const App = () => {
               grocery={grocery}
               handleRemoveItem={_handleRemoveItem}
               onItemDblClick={_onItemDobuleCLick}
-              onEnterKeyPress={_onKeyPressHandler}
+              onKeyPress={_onKeyPressHandler}
             />
           </div>
         ))}
