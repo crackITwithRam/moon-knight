@@ -21,7 +21,7 @@ const Item = ({
               defaultValue={grocery.name}
               name="name"
             />
-            <input type="text" defaultValue={grocery.price} name="price" onKeyPress={(e) => onEnterKeyPress(e,grocery.id)} width="50%" />
+            <input type="text" defaultValue={grocery.price} name="price" onKeyPress={(e) => onKeyPress(e,grocery.id)} width="50%" />
           </div>
         ) : (
           <div
